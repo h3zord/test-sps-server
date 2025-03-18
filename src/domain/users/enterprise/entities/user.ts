@@ -40,6 +40,7 @@ export class User extends Entity<UserProps> {
     const user = new User(
       {
         ...props,
+        type: props.type ?? 'user',
         createdAt: props.createdAt ?? new Date(),
       },
       id,
