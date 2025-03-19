@@ -1,4 +1,7 @@
-import { UserRepository } from '@/domain/users/application/repositories/user-repository'
+import {
+  PaginationParams,
+  UserRepository,
+} from '@/domain/users/application/repositories/user-repository'
 import { PrismaUserMapper } from '../mappers/prisma-user-mapper'
 import { User } from '@/domain/users/enterprise/entities/user'
 import { prisma } from '../prisma'
@@ -38,8 +41,14 @@ export class PrismaUserRepository implements UserRepository {
     return PrismaUserMapper.toDomain(user)
   }
 
-  async fetchAll() {
-    const users = await prisma.user.findMany()
+  async fetchAll({ page = 1, limit = 20 }: PaginationParams) {
+    const itemsPerPage = limit
+    const skip = (page - 1) * itemsPerPage
+
+    const users = await prisma.user.findMany({
+      skip,
+      take: itemsPerPage,
+    })
 
     return users.map(PrismaUserMapper.toDomain)
   }

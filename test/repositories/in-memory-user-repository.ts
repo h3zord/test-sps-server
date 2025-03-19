@@ -1,4 +1,7 @@
-import { UserRepository } from '@/domain/users/application/repositories/user-repository'
+import {
+  PaginationParams,
+  UserRepository,
+} from '@/domain/users/application/repositories/user-repository'
 import { User } from '@/domain/users/enterprise/entities/user'
 
 export class InMemoryUserRepository implements UserRepository {
@@ -28,8 +31,11 @@ export class InMemoryUserRepository implements UserRepository {
     return user
   }
 
-  async fetchAll() {
-    return this.items
+  async fetchAll({ page, limit }: PaginationParams) {
+    const start = (page - 1) * limit
+    const end = start + limit
+
+    return this.items.slice(start, end)
   }
 
   async save(user: User) {

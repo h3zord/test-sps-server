@@ -22,7 +22,7 @@ describe('Fetch users', () => {
   })
 
   it('should be able to fetch all users', async () => {
-    const result = await sut.execute()
+    const result = await sut.execute({ page: 1, limit: 20 })
 
     expect(result.isRight()).toBe(true)
     expect(inMemoryUserRepository.items).toHaveLength(3)

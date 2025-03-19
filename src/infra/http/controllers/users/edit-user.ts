@@ -9,6 +9,9 @@ export async function editUser(
 ) {
   const editUserParamsSchema = z.object({
     id: z.string().uuid(),
+  })
+
+  const editUserBodySchema = z.object({
     name: z.string(),
     email: z.string().email(),
     password: z.string().min(4),
@@ -18,9 +21,8 @@ export async function editUser(
   const edituserUseCase = makeEditUserUseCase()
 
   try {
-    const { id, name, email, password, type } = editUserParamsSchema.parse(
-      req.body,
-    )
+    const { id } = editUserParamsSchema.parse(req.body)
+    const { name, email, password, type } = editUserBodySchema.parse(req.body)
 
     const result = await edituserUseCase.execute({
       id,
