@@ -2,27 +2,26 @@ import { InMemoryUserRepository } from 'test/repositories/in-memory-user-reposit
 import { makeUser } from 'test/factories/make-user'
 import { UserNotFoundError } from './errors/user-not-found-error'
 import { DeleteUserUseCase } from './delete-user'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
 let inMemoryUserRepository: InMemoryUserRepository
 
 let sut: DeleteUserUseCase
 
-describe('Delete email', () => {
+describe('Delete user', () => {
   beforeEach(() => {
     inMemoryUserRepository = new InMemoryUserRepository()
 
     sut = new DeleteUserUseCase(inMemoryUserRepository)
 
-    const user = makeUser({
-      email: 'johndoe@example.com',
-    })
+    const user = makeUser({}, new UniqueEntityID('1'))
 
     inMemoryUserRepository.create(user)
   })
 
-  it('should be able to delte an user', async () => {
+  it('should be able to delete an user', async () => {
     const result = await sut.execute({
-      email: 'johndoe@example.com',
+      id: '1',
     })
 
     expect(result.isRight()).toBe(true)
@@ -31,7 +30,7 @@ describe('Delete email', () => {
 
   it('should not be able to delete an user if it does not exist', async () => {
     const result = await sut.execute({
-      email: 'invalid-email',
+      id: 'invalid-id',
     })
 
     expect(result.isLeft()).toBe(true)

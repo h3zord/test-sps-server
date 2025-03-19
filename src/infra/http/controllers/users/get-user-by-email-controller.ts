@@ -8,16 +8,16 @@ export async function getUserByEmailController(
   res: Response,
   next: NextFunction,
 ) {
-  const getUserByEmailParamsSchema = z.object({
+  const getUserByEmailQuerySchema = z.object({
     email: z.string().email(),
   })
 
-  const getuserbyemailUseCase = makeGetUserByEmailUseCase()
+  const getUserByEmailUseCase = makeGetUserByEmailUseCase()
 
   try {
-    const { email } = getUserByEmailParamsSchema.parse(req.params)
+    const { email } = getUserByEmailQuerySchema.parse(req.query)
 
-    const result = await getuserbyemailUseCase.execute({
+    const result = await getUserByEmailUseCase.execute({
       email,
     })
 

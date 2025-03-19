@@ -8,16 +8,16 @@ export async function deleteUserController(
   next: NextFunction,
 ) {
   const deleteUserParamsSchema = z.object({
-    email: z.string().email(),
+    id: z.string().uuid(),
   })
 
-  const deleteuserUseCase = makeDeleteUserUseCase()
+  const deleteUserUseCase = makeDeleteUserUseCase()
 
   try {
-    const { email } = deleteUserParamsSchema.parse(req.params)
+    const { id } = deleteUserParamsSchema.parse(req.params)
 
-    const result = await deleteuserUseCase.execute({
-      email,
+    const result = await deleteUserUseCase.execute({
+      id,
     })
 
     if (result.isLeft()) {

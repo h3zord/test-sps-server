@@ -26,7 +26,16 @@ export async function authenticateController(
       return res.status(400).json({ error: result.value.message })
     }
 
-    return res.status(200).json({ token: result.value })
+    const acessToken = result.value.accessToken
+
+    res.cookie('token', acessToken, {
+      httpOnly: true,
+      secure: true,
+      maxAge: 3600000 * 24 * 7, // 7 dias
+      sameSite: 'strict',
+    })
+
+    return res.status(204).end()
   } catch (error) {
     next(error)
   }

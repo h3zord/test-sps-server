@@ -3,7 +3,7 @@ import { UserRepository } from '../repositories/user-repository'
 import { UserNotFoundError } from './errors/user-not-found-error'
 
 interface DeleteUserUseCaseRequest {
-  email: string
+  id: string
 }
 
 type DeleteUserUseCaseResponse = Either<UserNotFoundError, null>
@@ -12,9 +12,9 @@ export class DeleteUserUseCase {
   constructor(private userRepository: UserRepository) {}
 
   async execute({
-    email,
+    id,
   }: DeleteUserUseCaseRequest): Promise<DeleteUserUseCaseResponse> {
-    const user = await this.userRepository.findByEmail(email)
+    const user = await this.userRepository.findById(id)
 
     if (!user) {
       return left(new UserNotFoundError())
