@@ -4,9 +4,9 @@ CREATE TABLE "User" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "type" TEXT NOT NULL DEFAULT 'USER',
+    "type" TEXT NOT NULL DEFAULT 'user',
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "updatedAt" DATETIME
 );
 
 -- CreateIndex

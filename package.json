@@ -6,14 +6,14 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
-    "start": "node build/server.js",
+    "start": "yarn prisma:migrate && yarn prisma:seed && node build/server.js",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "vitest run --dir src/http",
-    "test:e2e:watch": "vitest --dir src/http"
-  },
-  "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "test:e2e:watch": "vitest --dir src/http",
+    "lint": "eslint src --ext .ts,.tsx --fix",
+    "prisma:migrate": "prisma migrate deploy",
+    "prisma:seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "6.5.0",
