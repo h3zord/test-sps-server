@@ -8,6 +8,16 @@ export class InMemoryUsersRepository implements UsersRepository {
     this.items.push(user)
   }
 
+  async findById(id: string) {
+    const user = this.items.find((item) => item.id.toString() === id)
+
+    if (!user) {
+      return null
+    }
+
+    return user
+  }
+
   async findByEmail(email: string) {
     const user = this.items.find((item) => item.email === email)
 
@@ -20,5 +30,13 @@ export class InMemoryUsersRepository implements UsersRepository {
 
   async fetchAll() {
     return this.items
+  }
+
+  async save(user: User) {
+    const itemIndex = this.items.findIndex(
+      (item) => item.id.toString() === user.id.toString(),
+    )
+
+    this.items[itemIndex] = user
   }
 }
