@@ -1,32 +1,28 @@
-import { makeEditUserUseCase } from '@/infra/factories/make-edit-user-use-case'
+import { makeRegisterUserUseCase } from '@/infra/factories/make-register-user-use-case'
 import { NextFunction, Request, Response } from 'express'
 import { z } from 'zod'
 import { UserPresenter } from '../../presenters/user-presenter'
 
-export async function editUserController(
+export async function registerUserController(
   req: Request,
   res: Response,
   next: NextFunction,
 ) {
-  const editUserParamsSchema = z.object({
-    id: z.string().uuid(),
-  })
-
-  const editUserBodySchema = z.object({
+  const registerUserBodySchema = z.object({
     name: z.string(),
     email: z.string().email(),
     password: z.string().min(4),
     type: z.enum(['admin', 'user']).default('user'),
   })
 
-  const edituserUseCase = makeEditUserUseCase()
+  const registerUserUseCase = makeRegisterUserUseCase()
 
   try {
-    const { id } = editUserParamsSchema.parse(req.params)
-    const { name, email, password, type } = editUserBodySchema.parse(req.body)
+    const { name, email, password, type } = registerUserBodySchema.parse(
+      req.body,
+    )
 
-    const result = await edituserUseCase.execute({
-      id,
+    const result = await registerUserUseCase.execute({
       name,
       email,
       password,
@@ -38,7 +34,7 @@ export async function editUserController(
     }
 
     return res
-      .status(200)
+      .status(201)
       .json({ user: UserPresenter.toHTTP(result.value.user) })
   } catch (error) {
     next(error)

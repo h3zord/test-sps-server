@@ -1,6 +1,7 @@
 import { makeGetUserByEmailUseCase } from '@/infra/factories/make-get-user-by-email-use-case'
 import { NextFunction, Request, Response } from 'express'
 import { z } from 'zod'
+import { UserPresenter } from '../../presenters/user-presenter'
 
 export async function getUserByEmailController(
   req: Request,
@@ -24,7 +25,9 @@ export async function getUserByEmailController(
       return res.status(400).json({ error: result.value.message })
     }
 
-    return res.status(200).json(result.value)
+    return res
+      .status(200)
+      .json({ user: UserPresenter.toHTTP(result.value.user) })
   } catch (error) {
     next(error)
   }

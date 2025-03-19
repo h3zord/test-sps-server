@@ -1,6 +1,7 @@
 import { makeFetchUsersUseCase } from '@/infra/factories/make-fetch-users-use-case'
 import { NextFunction, Request, Response } from 'express'
 import { z } from 'zod'
+import { UserPresenter } from '../../presenters/user-presenter'
 
 export async function fetchUsersController(
   req: Request,
@@ -33,7 +34,9 @@ export async function fetchUsersController(
       limit,
     })
 
-    return res.status(200).json(result.value)
+    const users = result.value?.users
+
+    return res.status(200).json({ users: users?.map(UserPresenter.toHTTP) })
   } catch (error) {
     next(error)
   }

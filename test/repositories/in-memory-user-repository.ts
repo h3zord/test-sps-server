@@ -31,7 +31,7 @@ export class InMemoryUserRepository implements UserRepository {
     return user
   }
 
-  async fetchAll({ page, limit }: PaginationParams) {
+  async fetchAll({ page = 1, limit = 20 }: PaginationParams) {
     const start = (page - 1) * limit
     const end = start + limit
 
