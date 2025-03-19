@@ -20,7 +20,7 @@ export class DeleteUserUseCase {
       return left(new UserNotFoundError())
     }
 
-    await this.usersRepository.delete(email)
+    await this.usersRepository.delete(user)
 
     return right(null)
   }

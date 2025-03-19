@@ -40,8 +40,8 @@ export class InMemoryUsersRepository implements UsersRepository {
     this.items[itemIndex] = user
   }
 
-  async delete(email: string) {
-    const itemIndex = this.items.findIndex((item) => item.email === email)
+  async delete(user: User) {
+    const itemIndex = this.items.findIndex((item) => item.email === user.email)
 
     this.items.splice(itemIndex, 1)
   }
