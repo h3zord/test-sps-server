@@ -67,7 +67,6 @@ Caso utilize o yarn
 yarn run test
 ```
 
-
 <strong>Node.js irá executar a aplicação na porta padrão 3333.</strong>
 <br/>
 ➜ http://localhost:3333
