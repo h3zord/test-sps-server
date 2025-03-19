@@ -2,7 +2,7 @@ import { makeFetchUsersUseCase } from '@/infra/factories/make-fetch-users-use-ca
 import { NextFunction, Request, Response } from 'express'
 import { z } from 'zod'
 
-export async function fetchUsers(
+export async function fetchUsersController(
   req: Request,
   res: Response,
   next: NextFunction,

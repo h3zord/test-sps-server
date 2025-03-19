@@ -2,7 +2,7 @@ import { makeEditUserUseCase } from '@/infra/factories/make-edit-user-use-case'
 import { NextFunction, Request, Response } from 'express'
 import { z } from 'zod'
 
-export async function editUser(
+export async function editUserController(
   req: Request,
   res: Response,
   next: NextFunction,

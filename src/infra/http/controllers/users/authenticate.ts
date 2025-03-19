@@ -2,7 +2,7 @@ import { makeAuthenticateUseCase } from '@/infra/factories/make-authenticate-use
 import { NextFunction, Request, Response } from 'express'
 import { z } from 'zod'
 
-export async function authenticate(
+export async function authenticateController(
   req: Request,
   res: Response,
   next: NextFunction,

@@ -2,7 +2,7 @@ import { makeDeleteUserUseCase } from '@/infra/factories/make-delete-user-use-ca
 import { NextFunction, Request, Response } from 'express'
 import { z } from 'zod'
 
-export async function deleteUser(
+export async function deleteUserController(
   req: Request,
   res: Response,
   next: NextFunction,
