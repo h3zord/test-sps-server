@@ -1,23 +1,23 @@
-import { InMemoryUsersRepository } from 'test/repositories/in-memory-user-repository'
+import { InMemoryUserRepository } from 'test/repositories/in-memory-user-repository'
 import { makeUser } from 'test/factories/make-user'
 import { GetUserByEmailUseCase } from './get-user-by-email'
 import { UserNotFoundError } from './errors/user-not-found-error'
 
-let inMemoryUsersRepository: InMemoryUsersRepository
+let inMemoryUserRepository: InMemoryUserRepository
 
 let sut: GetUserByEmailUseCase
 
 describe('Get user by email', () => {
   beforeEach(() => {
-    inMemoryUsersRepository = new InMemoryUsersRepository()
+    inMemoryUserRepository = new InMemoryUserRepository()
 
-    sut = new GetUserByEmailUseCase(inMemoryUsersRepository)
+    sut = new GetUserByEmailUseCase(inMemoryUserRepository)
 
     const user = makeUser({
       email: 'johndoe@example.com',
     })
 
-    inMemoryUsersRepository.create(user)
+    inMemoryUserRepository.create(user)
   })
 
   it('should be able to get an user by email', async () => {

@@ -1,4 +1,4 @@
-import { InMemoryUsersRepository } from 'test/repositories/in-memory-user-repository'
+import { InMemoryUserRepository } from 'test/repositories/in-memory-user-repository'
 import { AuthenticateUseCase } from './authenticate'
 import { FakeEncrypter } from 'test/cryptography/fake-encrypter'
 import { makeUser } from 'test/factories/make-user'
@@ -6,11 +6,11 @@ import { WrongCredentialsError } from './errors/wrong-credentials-error'
 
 let authenticateUseCase: AuthenticateUseCase
 
-let userRepository: InMemoryUsersRepository
+let userRepository: InMemoryUserRepository
 let fakeEncrypter: FakeEncrypter
 
 describe('Authenticate use case', () => {
-  userRepository = new InMemoryUsersRepository()
+  userRepository = new InMemoryUserRepository()
   fakeEncrypter = new FakeEncrypter()
 
   authenticateUseCase = new AuthenticateUseCase(userRepository, fakeEncrypter)

@@ -1,6 +1,6 @@
 import { Either, left, right } from '@/core/either'
 import { User } from '../../enterprise/entities/user'
-import { UsersRepository } from '../repositories/user-repository'
+import { UserRepository } from '../repositories/user-repository'
 import { UserNotFoundError } from './errors/user-not-found-error'
 
 interface EditUserUseCaseRequest {
@@ -19,7 +19,7 @@ type EditUserUseCaseResponse = Either<
 >
 
 export class EditUserUseCase {
-  constructor(private usersRepository: UsersRepository) {}
+  constructor(private userRepository: UserRepository) {}
 
   async execute({
     id,
@@ -28,7 +28,7 @@ export class EditUserUseCase {
     password,
     type,
   }: EditUserUseCaseRequest): Promise<EditUserUseCaseResponse> {
-    const user = await this.usersRepository.findById(id)
+    const user = await this.userRepository.findById(id)
 
     if (!user) {
       return left(new UserNotFoundError())
@@ -39,7 +39,7 @@ export class EditUserUseCase {
     user.password = password
     user.type = type
 
-    await this.usersRepository.save(user)
+    await this.userRepository.save(user)
 
     return right({
       user,

@@ -1,17 +1,17 @@
-import { InMemoryUsersRepository } from 'test/repositories/in-memory-user-repository'
+import { InMemoryUserRepository } from 'test/repositories/in-memory-user-repository'
 import { RegisterUserUseCase } from './register-user'
 import { makeUser } from 'test/factories/make-user'
 import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 
-let inMemoryUsersRepository: InMemoryUsersRepository
+let inMemoryUserRepository: InMemoryUserRepository
 
 let sut: RegisterUserUseCase
 
 describe('Register user', () => {
   beforeEach(() => {
-    inMemoryUsersRepository = new InMemoryUsersRepository()
+    inMemoryUserRepository = new InMemoryUserRepository()
 
-    sut = new RegisterUserUseCase(inMemoryUsersRepository)
+    sut = new RegisterUserUseCase(inMemoryUserRepository)
   })
 
   it('should be able to register a new user', async () => {
@@ -23,7 +23,7 @@ describe('Register user', () => {
     })
 
     expect(result.isRight()).toBe(true)
-    expect(inMemoryUsersRepository.items).toHaveLength(1)
+    expect(inMemoryUserRepository.items).toHaveLength(1)
 
     expect(result.value).toMatchObject({
       user: expect.objectContaining({
@@ -32,7 +32,7 @@ describe('Register user', () => {
     })
 
     expect(result.value).toEqual({
-      user: inMemoryUsersRepository.items[0],
+      user: inMemoryUserRepository.items[0],
     })
   })
 
@@ -43,7 +43,7 @@ describe('Register user', () => {
       email,
     })
 
-    inMemoryUsersRepository.create(newUser)
+    inMemoryUserRepository.create(newUser)
 
     const result = await sut.execute({
       name: 'John Doe',
@@ -53,7 +53,7 @@ describe('Register user', () => {
     })
 
     expect(result.isLeft()).toBe(true)
-    expect(inMemoryUsersRepository.items).toHaveLength(1)
+    expect(inMemoryUserRepository.items).toHaveLength(1)
     expect(result.value).toBeInstanceOf(UserAlreadyExistsError)
   })
 })

@@ -1,23 +1,23 @@
-import { InMemoryUsersRepository } from 'test/repositories/in-memory-user-repository'
+import { InMemoryUserRepository } from 'test/repositories/in-memory-user-repository'
 import { makeUser } from 'test/factories/make-user'
 import { UserNotFoundError } from './errors/user-not-found-error'
 import { DeleteUserUseCase } from './delete-user'
 
-let inMemoryUsersRepository: InMemoryUsersRepository
+let inMemoryUserRepository: InMemoryUserRepository
 
 let sut: DeleteUserUseCase
 
 describe('Delete email', () => {
   beforeEach(() => {
-    inMemoryUsersRepository = new InMemoryUsersRepository()
+    inMemoryUserRepository = new InMemoryUserRepository()
 
-    sut = new DeleteUserUseCase(inMemoryUsersRepository)
+    sut = new DeleteUserUseCase(inMemoryUserRepository)
 
     const user = makeUser({
       email: 'johndoe@example.com',
     })
 
-    inMemoryUsersRepository.create(user)
+    inMemoryUserRepository.create(user)
   })
 
   it('should be able to delte an user', async () => {
@@ -26,7 +26,7 @@ describe('Delete email', () => {
     })
 
     expect(result.isRight()).toBe(true)
-    expect(inMemoryUsersRepository.items).toHaveLength(0)
+    expect(inMemoryUserRepository.items).toHaveLength(0)
   })
 
   it('should not be able to delete an user if it does not exist', async () => {

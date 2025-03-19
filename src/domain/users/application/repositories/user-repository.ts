@@ -1,6 +1,6 @@
 import { User } from '../../enterprise/entities/user'
 
-export interface UsersRepository {
+export interface UserRepository {
   create(user: User): Promise<void>
   findById(id: string): Promise<User | null>
   findByEmail(email: string): Promise<User | null>

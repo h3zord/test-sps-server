@@ -1,6 +1,6 @@
 import { Either, left, right } from '@/core/either'
 import { WrongCredentialsError } from './errors/wrong-credentials-error'
-import { UsersRepository } from '../repositories/user-repository'
+import { UserRepository } from '../repositories/user-repository'
 import { Encrypter } from '../cryptography/encrypter'
 
 interface AuthenticateUseCaseRequest {
@@ -17,7 +17,7 @@ type AuthenticateUseCaseResponse = Either<
 
 export class AuthenticateUseCase {
   constructor(
-    private userRepository: UsersRepository,
+    private userRepository: UserRepository,
     private encrypter: Encrypter,
   ) {}
 

@@ -16,12 +16,11 @@ enum Role {
 }
 
 model User {
-  id       String @id @default(uuid())
-  name     String
-  email    String @unique
-  password String
-  type     Role   @default(user)
-
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  password  String
+  type      Role      @default(user)
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 }

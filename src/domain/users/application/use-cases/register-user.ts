@@ -1,7 +1,7 @@
 import { Either, left, right } from '@/core/either'
 import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 import { User } from '../../enterprise/entities/user'
-import { UsersRepository } from '../repositories/user-repository'
+import { UserRepository } from '../repositories/user-repository'
 
 interface RegisterUserUseCaseRequest {
   name: string
@@ -18,7 +18,7 @@ type RegisterUserUseCaseResponse = Either<
 >
 
 export class RegisterUserUseCase {
-  constructor(private usersRepository: UsersRepository) {}
+  constructor(private userRepository: UserRepository) {}
 
   async execute({
     name,
@@ -26,7 +26,7 @@ export class RegisterUserUseCase {
     password,
     type,
   }: RegisterUserUseCaseRequest): Promise<RegisterUserUseCaseResponse> {
-    const userWithSameEmail = await this.usersRepository.findByEmail(email)
+    const userWithSameEmail = await this.userRepository.findByEmail(email)
 
     if (userWithSameEmail) {
       return left(new UserAlreadyExistsError(email))
@@ -39,7 +39,7 @@ export class RegisterUserUseCase {
       type,
     })
 
-    await this.usersRepository.create(user)
+    await this.userRepository.create(user)
 
     return right({
       user,

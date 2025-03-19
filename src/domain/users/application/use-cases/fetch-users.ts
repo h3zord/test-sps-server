@@ -1,6 +1,6 @@
 import { Either, right } from '@/core/either'
 import { User } from '../../enterprise/entities/user'
-import { UsersRepository } from '../repositories/user-repository'
+import { UserRepository } from '../repositories/user-repository'
 
 type FetchUsersUseCaseResponse = Either<
   null,
@@ -10,10 +10,10 @@ type FetchUsersUseCaseResponse = Either<
 >
 
 export class FetchUsersUseCase {
-  constructor(private usersRepository: UsersRepository) {}
+  constructor(private userRepository: UserRepository) {}
 
   async execute(): Promise<FetchUsersUseCaseResponse> {
-    const users = await this.usersRepository.fetchAll()
+    const users = await this.userRepository.fetchAll()
 
     return right({
       users,
