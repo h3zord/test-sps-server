@@ -2,7 +2,7 @@ import { InMemoryUsersRepository } from 'test/repositories/in-memory-user-reposi
 import { AuthenticateUseCase } from './authenticate'
 import { FakeEncrypter } from 'test/cryptography/fake-encrypter'
 import { makeUser } from 'test/factories/make-user'
-import { WrongCredentialsError } from './errors/wrong-credentials-error'
+import { WrongCredentialsError } from './errors/wrong-credentials'
 
 let authenticateUseCase: AuthenticateUseCase
 

@@ -1,7 +1,7 @@
 import { InMemoryUsersRepository } from 'test/repositories/in-memory-user-repository'
 import { RegisterUserUseCase } from './register-user'
 import { makeUser } from 'test/factories/make-user'
-import { UserAlreadyExistsError } from './errors/user-already-exists-error'
+import { UserAlreadyExistsError } from './errors/user-already-exists'
 
 let inMemoryUsersRepository: InMemoryUsersRepository
 

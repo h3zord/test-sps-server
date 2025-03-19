@@ -1,7 +1,7 @@
 import { InMemoryUsersRepository } from 'test/repositories/in-memory-user-repository'
 import { makeUser } from 'test/factories/make-user'
 import { GetUserByEmailUseCase } from './get-user-by-email'
-import { UserNotFoundError } from './errors/user-not-found-error'
+import { UserNotFoundError } from './errors/user-not-found'
 
 let inMemoryUsersRepository: InMemoryUsersRepository
 

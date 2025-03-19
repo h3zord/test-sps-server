@@ -1,6 +1,6 @@
 import { InMemoryUsersRepository } from 'test/repositories/in-memory-user-repository'
 import { makeUser } from 'test/factories/make-user'
-import { UserNotFoundError } from './errors/user-not-found-error'
+import { UserNotFoundError } from './errors/user-not-found'
 import { EditUserUseCase } from './edit-user'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 

@@ -1,7 +1,7 @@
 import { Either, left, right } from '@/core/either'
 import { User } from '../../enterprise/entities/user'
 import { UsersRepository } from '../repositories/user-repository'
-import { UserNotFoundError } from './errors/user-not-found-error'
+import { UserNotFoundError } from './errors/user-not-found'
 
 interface EditUserUseCaseRequest {
   id: string

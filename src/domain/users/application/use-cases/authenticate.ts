@@ -1,5 +1,5 @@
 import { Either, left, right } from '@/core/either'
-import { WrongCredentialsError } from './errors/wrong-credentials-error'
+import { WrongCredentialsError } from './errors/wrong-credentials'
 import { UsersRepository } from '../repositories/user-repository'
 import { Encrypter } from '../cryptography/encrypter'
 
