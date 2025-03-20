@@ -7,16 +7,14 @@ export function verifyTokenHandler(
   res: Response,
   next: NextFunction,
 ) {
-  const authHeader = req.headers.authorization
+  const acessToken = req.cookies.token
 
-  if (!authHeader) {
+  if (!acessToken) {
     return res.status(401).json({ error: 'Token not found' })
   }
 
-  const token = authHeader.split(' ')[1]
-
   try {
-    jwt.verify(token, env.SECRET_KEY)
+    jwt.verify(acessToken, env.SECRET_KEY)
 
     next()
   } catch (error) {

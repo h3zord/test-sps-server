@@ -35,7 +35,7 @@ export async function authenticateController(
       sameSite: 'strict',
     })
 
-    return res.status(200).json({ acessToken })
+    return res.status(204).end()
   } catch (error) {
     next(error)
   }
