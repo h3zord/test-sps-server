@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "yarn prisma:migrate && yarn prisma:seed && tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
     "start": "yarn prisma:migrate && yarn prisma:seed && node build/server.js",
     "test": "vitest run",
