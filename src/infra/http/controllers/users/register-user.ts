@@ -9,7 +9,7 @@ export async function registerUserController(
   next: NextFunction,
 ) {
   const registerUserBodySchema = z.object({
-    name: z.string(),
+    name: z.string().min(3),
     email: z.string().email(),
     password: z.string().min(4),
     type: z.enum(['admin', 'user']).default('user'),

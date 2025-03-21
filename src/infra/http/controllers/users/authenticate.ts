@@ -28,7 +28,8 @@ export async function authenticateController(
 
     const acessToken = result.value.accessToken
 
-    res.cookie('token', acessToken, {
+    res.cookie('accessToken', acessToken, {
+      path: '/',
       httpOnly: true,
       secure: true,
       maxAge: 3600000 * 24 * 7, // 7 dias
